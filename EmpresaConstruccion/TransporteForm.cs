@@ -165,14 +165,13 @@ namespace EmpresaConstruccion
         private void btnAgregarRuta_Click(object sender, EventArgs e)
         {
             var form = new RutaForm();
+            form.CargarOrigenesYDestinos(_connectionString);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 rutaRepo.Add(form.IdOrigen, form.IdDestino, form.CostoTransporte, form.DistanciaKm, form.TiempoHoras, form.CapacidadRequerida);
                 CargarDatos();
             }
         }
-
-        // Corrige el uso de 'dynamic' en patrones usando reflexión para acceder a las propiedades de los objetos anónimos en TransporteForm.cs
         private void btnEditarRuta_Click(object sender, EventArgs e)
         {
             if (dgvRutas.CurrentRow != null && dgvRutas.CurrentRow.DataBoundItem != null)
@@ -186,6 +185,7 @@ namespace EmpresaConstruccion
                 decimal tiempo = (decimal)r.GetType().GetProperty("TiempoHoras").GetValue(r);
                 int capacidad = (int)r.GetType().GetProperty("CapacidadRequerida").GetValue(r);
                 var form = new RutaForm();
+                form.CargarOrigenesYDestinos(_connectionString);
                 form.IdOrigen = idOrigen;
                 form.IdDestino = idDestino;
                 form.CostoTransporte = costo;
@@ -212,13 +212,13 @@ namespace EmpresaConstruccion
         private void btnAgregarDistribucion_Click(object sender, EventArgs e)
         {
             var form = new DistribucionForm();
+            form.CargarRutasYProductos(_connectionString);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 distribucionRepo.Add(form.IdRuta, form.IdProducto, form.CantidadEnviada);
                 CargarDatos();
             }
         }
-
         private void btnEditarDistribucion_Click(object sender, EventArgs e)
         {
             if (dgvDistribucion.CurrentRow != null && dgvDistribucion.CurrentRow.DataBoundItem != null)
@@ -229,6 +229,7 @@ namespace EmpresaConstruccion
                 int idProducto = (int)d.GetType().GetProperty("IdProducto").GetValue(d);
                 int cantidad = (int)d.GetType().GetProperty("CantidadEnviada").GetValue(d);
                 var form = new DistribucionForm();
+                form.CargarRutasYProductos(_connectionString);
                 form.IdRuta = idRuta;
                 form.IdProducto = idProducto;
                 form.CantidadEnviada = cantidad;

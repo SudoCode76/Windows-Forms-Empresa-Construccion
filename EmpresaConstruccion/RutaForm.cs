@@ -2,6 +2,8 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using EmpresaConstruccion.Models;
+using EmpresaConstruccion.Data;
+using System.Collections.Generic;
 
 namespace EmpresaConstruccion
 {
@@ -41,8 +43,8 @@ namespace EmpresaConstruccion
         private System.Windows.Forms.Label lblDistancia;
         private System.Windows.Forms.Label lblTiempo;
         private System.Windows.Forms.Label lblCapacidad;
-        private System.Windows.Forms.NumericUpDown numOrigen;
-        private System.Windows.Forms.NumericUpDown numDestino;
+        private System.Windows.Forms.ComboBox cmbOrigen;
+        private System.Windows.Forms.ComboBox cmbDestino;
         private System.Windows.Forms.NumericUpDown numCosto;
         private System.Windows.Forms.NumericUpDown numDistancia;
         private System.Windows.Forms.NumericUpDown numTiempo;
@@ -56,15 +58,13 @@ namespace EmpresaConstruccion
             this.lblDistancia = new System.Windows.Forms.Label();
             this.lblTiempo = new System.Windows.Forms.Label();
             this.lblCapacidad = new System.Windows.Forms.Label();
-            this.numOrigen = new System.Windows.Forms.NumericUpDown();
-            this.numDestino = new System.Windows.Forms.NumericUpDown();
+            this.cmbOrigen = new System.Windows.Forms.ComboBox();
+            this.cmbDestino = new System.Windows.Forms.ComboBox();
             this.numCosto = new System.Windows.Forms.NumericUpDown();
             this.numDistancia = new System.Windows.Forms.NumericUpDown();
             this.numTiempo = new System.Windows.Forms.NumericUpDown();
             this.numCapacidad = new System.Windows.Forms.NumericUpDown();
             this.btnAceptar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numOrigen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDestino)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCosto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDistancia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTiempo)).BeginInit();
@@ -73,17 +73,17 @@ namespace EmpresaConstruccion
             // lblOrigen
             this.lblOrigen.AutoSize = true;
             this.lblOrigen.Location = new System.Drawing.Point(20, 20);
-            this.lblOrigen.Text = "Id Origen";
-            // numOrigen
-            this.numOrigen.Location = new System.Drawing.Point(120, 17);
-            this.numOrigen.Maximum = 1000000;
+            this.lblOrigen.Text = "Origen";
+            // cmbOrigen
+            this.cmbOrigen.Location = new System.Drawing.Point(120, 17);
+            this.cmbOrigen.Size = new System.Drawing.Size(200, 27);
             // lblDestino
             this.lblDestino.AutoSize = true;
             this.lblDestino.Location = new System.Drawing.Point(20, 60);
-            this.lblDestino.Text = "Id Destino";
-            // numDestino
-            this.numDestino.Location = new System.Drawing.Point(120, 57);
-            this.numDestino.Maximum = 1000000;
+            this.lblDestino.Text = "Destino";
+            // cmbDestino
+            this.cmbDestino.Location = new System.Drawing.Point(120, 57);
+            this.cmbDestino.Size = new System.Drawing.Size(200, 27);
             // lblCosto
             this.lblCosto.AutoSize = true;
             this.lblCosto.Location = new System.Drawing.Point(20, 100);
@@ -125,9 +125,9 @@ namespace EmpresaConstruccion
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(350, 310);
             this.Controls.Add(this.lblOrigen);
-            this.Controls.Add(this.numOrigen);
+            this.Controls.Add(this.cmbOrigen);
             this.Controls.Add(this.lblDestino);
-            this.Controls.Add(this.numDestino);
+            this.Controls.Add(this.cmbDestino);
             this.Controls.Add(this.lblCosto);
             this.Controls.Add(this.numCosto);
             this.Controls.Add(this.lblDistancia);
@@ -139,8 +139,6 @@ namespace EmpresaConstruccion
             this.Controls.Add(this.btnAceptar);
             this.Name = "RutaForm";
             this.Text = "Ruta";
-            ((System.ComponentModel.ISupportInitialize)(this.numOrigen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDestino)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCosto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDistancia)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTiempo)).EndInit();
@@ -149,11 +147,25 @@ namespace EmpresaConstruccion
             this.PerformLayout();
         }
 
-        // Elimina las propiedades automáticas que usan controles en tiempo de diseño, usa métodos públicos para obtener/establecer valores.
-        public int GetIdOrigen() => (int)numOrigen.Value;
-        public void SetIdOrigen(int value) => numOrigen.Value = value;
-        public int GetIdDestino() => (int)numDestino.Value;
-        public void SetIdDestino(int value) => numDestino.Value = value;
+        private List<Origen> origenes;
+        private List<Destino> destinos;
+        public void CargarOrigenesYDestinos(string connectionString)
+        {
+            var origenRepo = new OrigenRepository(connectionString);
+            var destinoRepo = new DestinoRepository(connectionString);
+            origenes = origenRepo.GetAll();
+            destinos = destinoRepo.GetAll();
+            cmbOrigen.DataSource = origenes;
+            cmbOrigen.DisplayMember = "Nombre";
+            cmbOrigen.ValueMember = "IdOrigen";
+            cmbDestino.DataSource = destinos;
+            cmbDestino.DisplayMember = "Nombre";
+            cmbDestino.ValueMember = "IdDestino";
+        }
+        public int GetIdOrigen() => cmbOrigen.SelectedValue != null ? (int)cmbOrigen.SelectedValue : 0;
+        public void SetIdOrigen(int value) => cmbOrigen.SelectedValue = value;
+        public int GetIdDestino() => cmbDestino.SelectedValue != null ? (int)cmbDestino.SelectedValue : 0;
+        public void SetIdDestino(int value) => cmbDestino.SelectedValue = value;
         public decimal GetCostoTransporte() => numCosto.Value;
         public void SetCostoTransporte(decimal value) => numCosto.Value = value;
         public decimal GetDistanciaKm() => numDistancia.Value;
