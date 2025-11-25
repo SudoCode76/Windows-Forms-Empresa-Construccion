@@ -19,13 +19,21 @@ namespace EmpresaConstruccion
         }
         private void InitializeComponent()
         {
-            this.dgvDestinos = new DataGridView { Location = new System.Drawing.Point(10, 10), Size = new System.Drawing.Size(600, 250), ReadOnly = true, SelectionMode = DataGridViewSelectionMode.FullRowSelect };
-            this.btnAgregar = new Button { Text = "Agregar", Location = new System.Drawing.Point(620, 10), Size = new System.Drawing.Size(100, 30) };
-            this.btnEditar = new Button { Text = "Editar", Location = new System.Drawing.Point(620, 50), Size = new System.Drawing.Size(100, 30) };
-            this.btnEliminar = new Button { Text = "Eliminar", Location = new System.Drawing.Point(620, 90), Size = new System.Drawing.Size(100, 30) };
-            this.Controls.AddRange(new Control[] { dgvDestinos, btnAgregar, btnEditar, btnEliminar });
-            this.ClientSize = new System.Drawing.Size(740, 280);
+            this.BackColor = System.Drawing.Color.FromArgb(245, 247, 250);
             this.Text = "Gestión de Destinos";
+            this.ClientSize = new System.Drawing.Size(740, 280);
+            var panel = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 1, BackColor = System.Drawing.Color.White };
+            panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+            panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            var btnPanel = new FlowLayoutPanel { Dock = DockStyle.Fill, FlowDirection = FlowDirection.TopDown, BackColor = System.Drawing.Color.FromArgb(240, 244, 255) };
+            this.dgvDestinos = new DataGridView { Dock = DockStyle.Fill, ReadOnly = true, SelectionMode = DataGridViewSelectionMode.FullRowSelect, BackgroundColor = System.Drawing.Color.White, BorderStyle = BorderStyle.None };
+            this.btnAgregar = new Button { Text = "Agregar", Width = 100, Height = 40, FlatStyle = FlatStyle.Flat, BackColor = System.Drawing.Color.FromArgb(44, 130, 201), ForeColor = System.Drawing.Color.White };
+            this.btnEditar = new Button { Text = "Editar", Width = 100, Height = 40, FlatStyle = FlatStyle.Flat, BackColor = System.Drawing.Color.FromArgb(52, 152, 219), ForeColor = System.Drawing.Color.White };
+            this.btnEliminar = new Button { Text = "Eliminar", Width = 100, Height = 40, FlatStyle = FlatStyle.Flat, BackColor = System.Drawing.Color.FromArgb(231, 76, 60), ForeColor = System.Drawing.Color.White };
+            btnPanel.Controls.AddRange(new Control[] { btnAgregar, btnEditar, btnEliminar });
+            panel.Controls.Add(dgvDestinos, 0, 0);
+            panel.Controls.Add(btnPanel, 1, 0);
+            this.Controls.Add(panel);
             btnAgregar.Click += btnAgregar_Click;
             btnEditar.Click += btnEditar_Click;
             btnEliminar.Click += btnEliminar_Click;

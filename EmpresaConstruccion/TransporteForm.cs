@@ -31,129 +31,47 @@ namespace EmpresaConstruccion
         private System.Windows.Forms.Button btnEliminarDistribucion;
         private void InitializeComponent()
         {
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabRutas = new System.Windows.Forms.TabPage();
-            this.tabDistribucion = new System.Windows.Forms.TabPage();
-            this.dgvRutas = new System.Windows.Forms.DataGridView();
-            this.dgvDistribucion = new System.Windows.Forms.DataGridView();
-            this.btnAgregarRuta = new System.Windows.Forms.Button();
-            this.btnEditarRuta = new System.Windows.Forms.Button();
-            this.btnEliminarRuta = new System.Windows.Forms.Button();
-            this.btnAgregarDistribucion = new System.Windows.Forms.Button();
-            this.btnEditarDistribucion = new System.Windows.Forms.Button();
-            this.btnEliminarDistribucion = new System.Windows.Forms.Button();
-            this.tabControl.SuspendLayout();
-            this.tabRutas.SuspendLayout();
-            this.tabDistribucion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRutas)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDistribucion)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // tabControl
-            // 
-            this.tabControl.Controls.Add(this.tabRutas);
-            this.tabControl.Controls.Add(this.tabDistribucion);
-            this.tabControl.Location = new System.Drawing.Point(10, 10);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(760, 380);
-            // 
-            // tabRutas
-            // 
-            this.tabRutas.Controls.Add(this.dgvRutas);
-            this.tabRutas.Controls.Add(this.btnAgregarRuta);
-            this.tabRutas.Controls.Add(this.btnEditarRuta);
-            this.tabRutas.Controls.Add(this.btnEliminarRuta);
-            this.tabRutas.Location = new System.Drawing.Point(4, 29);
-            this.tabRutas.Name = "tabRutas";
-            this.tabRutas.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRutas.Size = new System.Drawing.Size(752, 347);
-            this.tabRutas.Text = "Rutas";
-            this.tabRutas.UseVisualStyleBackColor = true;
-            // 
-            // dgvRutas
-            // 
-            this.dgvRutas.Location = new System.Drawing.Point(10, 10);
-            this.dgvRutas.Size = new System.Drawing.Size(600, 280);
-            this.dgvRutas.Name = "dgvRutas";
-            this.dgvRutas.TabIndex = 0;
-            // 
-            // btnAgregarRuta
-            // 
-            this.btnAgregarRuta.Location = new System.Drawing.Point(630, 10);
-            this.btnAgregarRuta.Size = new System.Drawing.Size(100, 30);
-            this.btnAgregarRuta.Text = "Agregar";
-            this.btnAgregarRuta.Click += new System.EventHandler(this.btnAgregarRuta_Click);
-            // 
-            // btnEditarRuta
-            // 
-            this.btnEditarRuta.Location = new System.Drawing.Point(630, 50);
-            this.btnEditarRuta.Size = new System.Drawing.Size(100, 30);
-            this.btnEditarRuta.Text = "Editar";
-            this.btnEditarRuta.Click += new System.EventHandler(this.btnEditarRuta_Click);
-            // 
-            // btnEliminarRuta
-            // 
-            this.btnEliminarRuta.Location = new System.Drawing.Point(630, 90);
-            this.btnEliminarRuta.Size = new System.Drawing.Size(100, 30);
-            this.btnEliminarRuta.Text = "Eliminar";
-            this.btnEliminarRuta.Click += new System.EventHandler(this.btnEliminarRuta_Click);
-            // 
-            // tabDistribucion
-            // 
-            this.tabDistribucion.Controls.Add(this.dgvDistribucion);
-            this.tabDistribucion.Controls.Add(this.btnAgregarDistribucion);
-            this.tabDistribucion.Controls.Add(this.btnEditarDistribucion);
-            this.tabDistribucion.Controls.Add(this.btnEliminarDistribucion);
-            this.tabDistribucion.Location = new System.Drawing.Point(4, 29);
-            this.tabDistribucion.Name = "tabDistribucion";
-            this.tabDistribucion.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDistribucion.Size = new System.Drawing.Size(752, 347);
-            this.tabDistribucion.Text = "Distribución";
-            this.tabDistribucion.UseVisualStyleBackColor = true;
-            // 
-            // dgvDistribucion
-            // 
-            this.dgvDistribucion.Location = new System.Drawing.Point(10, 10);
-            this.dgvDistribucion.Size = new System.Drawing.Size(600, 280);
-            this.dgvDistribucion.Name = "dgvDistribucion";
-            this.dgvDistribucion.TabIndex = 0;
-            // 
-            // btnAgregarDistribucion
-            // 
-            this.btnAgregarDistribucion.Location = new System.Drawing.Point(630, 10);
-            this.btnAgregarDistribucion.Size = new System.Drawing.Size(100, 30);
-            this.btnAgregarDistribucion.Text = "Agregar";
-            this.btnAgregarDistribucion.Click += new System.EventHandler(this.btnAgregarDistribucion_Click);
-            // 
-            // btnEditarDistribucion
-            // 
-            this.btnEditarDistribucion.Location = new System.Drawing.Point(630, 50);
-            this.btnEditarDistribucion.Size = new System.Drawing.Size(100, 30);
-            this.btnEditarDistribucion.Text = "Editar";
-            this.btnEditarDistribucion.Click += new System.EventHandler(this.btnEditarDistribucion_Click);
-            // 
-            // btnEliminarDistribucion
-            // 
-            this.btnEliminarDistribucion.Location = new System.Drawing.Point(630, 90);
-            this.btnEliminarDistribucion.Size = new System.Drawing.Size(100, 30);
-            this.btnEliminarDistribucion.Text = "Eliminar";
-            this.btnEliminarDistribucion.Click += new System.EventHandler(this.btnEliminarDistribucion_Click);
-            // 
-            // TransporteForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 400);
-            this.Controls.Add(this.tabControl);
-            this.Name = "TransporteForm";
+            this.BackColor = System.Drawing.Color.FromArgb(245, 247, 250);
             this.Text = "Transporte y Distribución";
-            this.tabControl.ResumeLayout(false);
-            this.tabRutas.ResumeLayout(false);
-            this.tabDistribucion.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRutas)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDistribucion)).EndInit();
-            this.ResumeLayout(false);
+            this.ClientSize = new System.Drawing.Size(780, 400);
+            var panel = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 1, BackColor = System.Drawing.Color.White };
+            panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+            panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            var btnPanelRutas = new FlowLayoutPanel { Dock = DockStyle.Fill, FlowDirection = FlowDirection.TopDown, BackColor = System.Drawing.Color.FromArgb(240, 244, 255) };
+            var btnPanelDist = new FlowLayoutPanel { Dock = DockStyle.Fill, FlowDirection = FlowDirection.TopDown, BackColor = System.Drawing.Color.FromArgb(240, 244, 255) };
+            this.tabControl = new TabControl { Dock = DockStyle.Fill };
+            this.tabRutas = new TabPage("Rutas");
+            this.tabDistribucion = new TabPage("Distribución");
+            this.dgvRutas = new DataGridView { Dock = DockStyle.Fill, ReadOnly = true, SelectionMode = DataGridViewSelectionMode.FullRowSelect, BackgroundColor = System.Drawing.Color.White, BorderStyle = BorderStyle.None };
+            this.dgvDistribucion = new DataGridView { Dock = DockStyle.Fill, ReadOnly = true, SelectionMode = DataGridViewSelectionMode.FullRowSelect, BackgroundColor = System.Drawing.Color.White, BorderStyle = BorderStyle.None };
+            this.btnAgregarRuta = new Button { Text = "Agregar", Width = 100, Height = 40, FlatStyle = FlatStyle.Flat, BackColor = System.Drawing.Color.FromArgb(44, 130, 201), ForeColor = System.Drawing.Color.White };
+            this.btnEditarRuta = new Button { Text = "Editar", Width = 100, Height = 40, FlatStyle = FlatStyle.Flat, BackColor = System.Drawing.Color.FromArgb(52, 152, 219), ForeColor = System.Drawing.Color.White };
+            this.btnEliminarRuta = new Button { Text = "Eliminar", Width = 100, Height = 40, FlatStyle = FlatStyle.Flat, BackColor = System.Drawing.Color.FromArgb(231, 76, 60), ForeColor = System.Drawing.Color.White };
+            this.btnAgregarDistribucion = new Button { Text = "Agregar", Width = 100, Height = 40, FlatStyle = FlatStyle.Flat, BackColor = System.Drawing.Color.FromArgb(44, 130, 201), ForeColor = System.Drawing.Color.White };
+            this.btnEditarDistribucion = new Button { Text = "Editar", Width = 100, Height = 40, FlatStyle = FlatStyle.Flat, BackColor = System.Drawing.Color.FromArgb(52, 152, 219), ForeColor = System.Drawing.Color.White };
+            this.btnEliminarDistribucion = new Button { Text = "Eliminar", Width = 100, Height = 40, FlatStyle = FlatStyle.Flat, BackColor = System.Drawing.Color.FromArgb(231, 76, 60), ForeColor = System.Drawing.Color.White };
+            btnPanelRutas.Controls.AddRange(new Control[] { btnAgregarRuta, btnEditarRuta, btnEliminarRuta });
+            btnPanelDist.Controls.AddRange(new Control[] { btnAgregarDistribucion, btnEditarDistribucion, btnEliminarDistribucion });
+            var rutasPanel = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 1 };
+            rutasPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+            rutasPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            rutasPanel.Controls.Add(dgvRutas, 0, 0);
+            rutasPanel.Controls.Add(btnPanelRutas, 1, 0);
+            var distPanel = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 1 };
+            distPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+            distPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            distPanel.Controls.Add(dgvDistribucion, 0, 0);
+            distPanel.Controls.Add(btnPanelDist, 1, 0);
+            tabRutas.Controls.Add(rutasPanel);
+            tabDistribucion.Controls.Add(distPanel);
+            tabControl.TabPages.AddRange(new[] { tabRutas, tabDistribucion });
+            this.Controls.Add(tabControl);
+            btnAgregarRuta.Click += btnAgregarRuta_Click;
+            btnEditarRuta.Click += btnEditarRuta_Click;
+            btnEliminarRuta.Click += btnEliminarRuta_Click;
+            btnAgregarDistribucion.Click += btnAgregarDistribucion_Click;
+            btnEditarDistribucion.Click += btnEditarDistribucion_Click;
+            btnEliminarDistribucion.Click += btnEliminarDistribucion_Click;
         }
 
         private void CargarDatos()

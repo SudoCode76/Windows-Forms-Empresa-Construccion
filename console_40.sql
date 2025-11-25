@@ -12,7 +12,6 @@ CREATE TABLE origen (
     capacidad_produccion INT,  -- capacidad de oferta
     ubicacion VARCHAR(255)  -- ubicación del origen
 );
-select * from origen;
 
 -- Tabla para Destinos
 CREATE TABLE destino (

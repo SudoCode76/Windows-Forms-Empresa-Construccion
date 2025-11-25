@@ -16,13 +16,18 @@ namespace EmpresaConstruccion
         }
         private void InitializeComponent()
         {
+            this.BackColor = System.Drawing.Color.FromArgb(245, 247, 250);
             this.Text = "Optimización de Transporte";
             this.ClientSize = new System.Drawing.Size(700, 500);
-            var btnCalcular = new Button { Text = "Calcular Modelos", Location = new System.Drawing.Point(20, 20), Size = new System.Drawing.Size(180, 40) };
-            var txtResultados = new TextBox { Multiline = true, ScrollBars = ScrollBars.Vertical, Location = new System.Drawing.Point(20, 80), Size = new System.Drawing.Size(650, 380), ReadOnly = true };
+            var panel = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 2, BackColor = System.Drawing.Color.White };
+            panel.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+            panel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            var btnCalcular = new Button { Text = "Calcular Modelos", Height = 45, Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, BackColor = System.Drawing.Color.FromArgb(44, 130, 201), ForeColor = System.Drawing.Color.White, Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point) };
+            var txtResultados = new TextBox { Multiline = true, ScrollBars = ScrollBars.Vertical, Dock = DockStyle.Fill, ReadOnly = true, Font = new System.Drawing.Font("Consolas", 11F), BackColor = System.Drawing.Color.FromArgb(250, 250, 250), ForeColor = System.Drawing.Color.FromArgb(30, 34, 45) };
             btnCalcular.Click += (s, e) => MostrarResultados(txtResultados);
-            this.Controls.Add(btnCalcular);
-            this.Controls.Add(txtResultados);
+            panel.Controls.Add(btnCalcular, 0, 0);
+            panel.Controls.Add(txtResultados, 0, 1);
+            this.Controls.Add(panel);
         }
         private void MostrarResultados(TextBox txtResultados)
         {
