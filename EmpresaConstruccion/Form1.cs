@@ -64,5 +64,11 @@ namespace EmpresaConstruccion
             var form = new ProductosForm(connectionString);
             form.ShowDialog();
         }
+
+        private void menuOptimizacion_Click(object sender, EventArgs e)
+        {
+            var form = new OptimizacionForm(connectionString);
+            form.ShowDialog();
+        }
     }
 }

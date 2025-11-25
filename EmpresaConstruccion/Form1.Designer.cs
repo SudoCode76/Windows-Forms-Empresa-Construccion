@@ -33,6 +33,7 @@
             this.menuDestino = new System.Windows.Forms.ToolStripMenuItem();
             this.menuProducto = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTransporte = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOptimizacion = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -40,6 +41,7 @@
                 this.menuDestino,
                 this.menuProducto,
                 this.menuTransporte,
+                this.menuOptimizacion,
                 this.menuSalir
             });
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
@@ -76,6 +78,13 @@
             this.menuTransporte.Text = "Transporte";
             this.menuTransporte.Click += new System.EventHandler(this.menuTransporte_Click);
             // 
+            // menuOptimizacion
+            // 
+            this.menuOptimizacion.Name = "menuOptimizacion";
+            this.menuOptimizacion.Size = new System.Drawing.Size(120, 24);
+            this.menuOptimizacion.Text = "Optimización";
+            this.menuOptimizacion.Click += new System.EventHandler(this.menuOptimizacion_Click);
+            // 
             // menuSalir
             // 
             this.menuSalir.Name = "menuSalir";
@@ -111,6 +120,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuDestino;
         private System.Windows.Forms.ToolStripMenuItem menuProducto;
         private System.Windows.Forms.ToolStripMenuItem menuTransporte;
+        private System.Windows.Forms.ToolStripMenuItem menuOptimizacion;
         private System.Windows.Forms.ToolStripMenuItem menuSalir;
         private System.Windows.Forms.Label lblTitulo;
     }
