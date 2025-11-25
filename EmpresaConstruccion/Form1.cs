@@ -15,6 +15,18 @@ namespace EmpresaConstruccion
             InitializeComponent();
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            using (var login = new LoginForm(connectionString))
+            {
+                if (login.ShowDialog(this) != DialogResult.OK)
+                {
+                    this.Close();
+                }
+            }
+        }
+
         private void ProbarConexion()
         {
             try

@@ -76,6 +76,14 @@ CREATE TABLE registro_transporte (
 );
 
 
+CREATE TABLE usuario (
+  id_usuario SERIAL PRIMARY KEY,
+  usuario varchar (10),
+  password varchar (10)
+);
+
+INSERT INTO usuario (usuario, password) VALUES
+('admin', 'admin');
 
 
 

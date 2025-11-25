@@ -76,8 +76,25 @@ namespace EmpresaConstruccion
 
         private void CargarDatos()
         {
-            dgvRutas.DataSource = rutaRepo.GetAll();
+            // Obtener orígenes y destinos para mostrar nombres en vez de IDs
+            var origenes = new EmpresaConstruccion.Data.OrigenRepository(_connectionString).GetAll();
+            var destinos = new EmpresaConstruccion.Data.DestinoRepository(_connectionString).GetAll();
+            var rutas = rutaRepo.GetAll();
+            var rutasDisplay = rutas.Select(r => new {
+                IdRuta = (int)r.GetType().GetProperty("IdRuta").GetValue(r),
+                Origen = origenes.FirstOrDefault(o => o.IdOrigen == (int)r.GetType().GetProperty("IdOrigen").GetValue(r))?.Nombre,
+                Destino = destinos.FirstOrDefault(d => d.IdDestino == (int)r.GetType().GetProperty("IdDestino").GetValue(r))?.Nombre,
+                CostoTransporte = (decimal)r.GetType().GetProperty("CostoTransporte").GetValue(r),
+                DistanciaKm = (decimal)r.GetType().GetProperty("DistanciaKm").GetValue(r),
+                TiempoHoras = (decimal)r.GetType().GetProperty("TiempoHoras").GetValue(r),
+                CapacidadRequerida = (int)r.GetType().GetProperty("CapacidadRequerida").GetValue(r)
+            }).ToList();
+            dgvRutas.DataSource = null;
+            dgvRutas.DataSource = rutasDisplay;
+            dgvRutas.ClearSelection();
+            dgvDistribucion.DataSource = null;
             dgvDistribucion.DataSource = distribucionRepo.GetAll();
+            dgvDistribucion.ClearSelection();
         }
 
         private void btnAgregarRuta_Click(object sender, EventArgs e)

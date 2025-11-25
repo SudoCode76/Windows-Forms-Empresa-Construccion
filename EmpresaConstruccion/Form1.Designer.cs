@@ -28,82 +28,100 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.menuOrigen = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuDestino = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuProducto = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuTransporte = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuOptimizacion = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuSalir = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblTitulo = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            menuStrip = new MenuStrip();
+            menuOrigen = new ToolStripMenuItem();
+            menuDestino = new ToolStripMenuItem();
+            menuProducto = new ToolStripMenuItem();
+            menuTransporte = new ToolStripMenuItem();
+            menuOptimizacion = new ToolStripMenuItem();
+            menuSalir = new ToolStripMenuItem();
+            lblTitulo = new Label();
+            menuStrip.SuspendLayout();
+            SuspendLayout();
+            // 
             // menuStrip
-            this.menuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(34)))), ((int)(((byte)(45)))));
-            this.menuStrip.ForeColor = System.Drawing.Color.White;
-            this.menuStrip.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                this.menuOrigen,
-                this.menuDestino,
-                this.menuProducto,
-                this.menuTransporte,
-                this.menuOptimizacion,
-                this.menuSalir
-            });
-            this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(800, 36);
-            this.menuStrip.TabIndex = 100;
-            this.menuStrip.Text = "menuStrip";
+            // 
+            menuStrip.BackColor = Color.FromArgb(30, 34, 45);
+            menuStrip.Font = new Font("Segoe UI", 12F);
+            menuStrip.ForeColor = Color.White;
+            menuStrip.ImageScalingSize = new Size(20, 20);
+            menuStrip.Items.AddRange(new ToolStripItem[] { menuOrigen, menuDestino, menuProducto, menuTransporte, menuOptimizacion, menuSalir });
+            menuStrip.Location = new Point(0, 0);
+            menuStrip.Name = "menuStrip";
+            menuStrip.Size = new Size(800, 36);
+            menuStrip.TabIndex = 100;
+            menuStrip.Text = "menuStrip";
+            // 
             // menuOrigen
-            this.menuOrigen.Name = "menuOrigen";
-            this.menuOrigen.Size = new System.Drawing.Size(90, 32);
-            this.menuOrigen.Text = "Orígenes";
-            this.menuOrigen.Click += new System.EventHandler(this.menuOrigen_Click);
+            // 
+            menuOrigen.Name = "menuOrigen";
+            menuOrigen.Size = new Size(104, 32);
+            menuOrigen.Text = "Orígenes";
+            menuOrigen.Click += menuOrigen_Click;
+            // 
             // menuDestino
-            this.menuDestino.Name = "menuDestino";
-            this.menuDestino.Size = new System.Drawing.Size(94, 32);
-            this.menuDestino.Text = "Destinos";
-            this.menuDestino.Click += new System.EventHandler(this.menuDestino_Click);
+            // 
+            menuDestino.Name = "menuDestino";
+            menuDestino.Size = new Size(101, 32);
+            menuDestino.Text = "Destinos";
+            menuDestino.Click += menuDestino_Click;
+            // 
             // menuProducto
-            this.menuProducto.Name = "menuProducto";
-            this.menuProducto.Size = new System.Drawing.Size(111, 32);
-            this.menuProducto.Text = "Productos";
-            this.menuProducto.Click += new System.EventHandler(this.menuProducto_Click);
+            // 
+            menuProducto.Name = "menuProducto";
+            menuProducto.Size = new Size(115, 32);
+            menuProducto.Text = "Productos";
+            menuProducto.Click += menuProducto_Click;
+            // 
             // menuTransporte
-            this.menuTransporte.Name = "menuTransporte";
-            this.menuTransporte.Size = new System.Drawing.Size(124, 32);
-            this.menuTransporte.Text = "Transporte";
-            this.menuTransporte.Click += new System.EventHandler(this.menuTransporte_Click);
+            // 
+            menuTransporte.Name = "menuTransporte";
+            menuTransporte.Size = new Size(118, 32);
+            menuTransporte.Text = "Transporte";
+            menuTransporte.Click += menuTransporte_Click;
+            // 
             // menuOptimizacion
-            this.menuOptimizacion.Name = "menuOptimizacion";
-            this.menuOptimizacion.Size = new System.Drawing.Size(140, 32);
-            this.menuOptimizacion.Text = "Optimización";
-            this.menuOptimizacion.Click += new System.EventHandler(this.menuOptimizacion_Click);
+            // 
+            menuOptimizacion.Name = "menuOptimizacion";
+            menuOptimizacion.Size = new Size(143, 32);
+            menuOptimizacion.Text = "Optimización";
+            menuOptimizacion.Click += menuOptimizacion_Click;
+            // 
             // menuSalir
-            this.menuSalir.Name = "menuSalir";
-            this.menuSalir.Size = new System.Drawing.Size(67, 32);
-            this.menuSalir.Text = "Salir";
-            this.menuSalir.Click += new System.EventHandler(this.menuSalir_Click);
+            // 
+            menuSalir.Name = "menuSalir";
+            menuSalir.Size = new Size(64, 32);
+            menuSalir.Text = "Salir";
+            menuSalir.Click += menuSalir_Click;
+            // 
             // lblTitulo
-            this.lblTitulo.Text = "Empresa Constructora";
-            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(130)))), ((int)(((byte)(201)))));
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblTitulo.Location = new System.Drawing.Point(80, 180);
+            // 
+            lblTitulo.Anchor = AnchorStyles.None;
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Segoe UI", 32F, FontStyle.Bold);
+            lblTitulo.ForeColor = Color.FromArgb(44, 130, 201);
+            lblTitulo.Location = new Point(80, 180);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(588, 72);
+            lblTitulo.TabIndex = 101;
+            lblTitulo.Text = "Empresa Constructora";
+            // 
             // Form1
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.menuStrip);
-            this.Controls.Add(this.lblTitulo);
-            this.MainMenuStrip = this.menuStrip;
-            this.Name = "Form1";
-            this.Text = "Empresa Constructora";
-            this.MinimumSize = new System.Drawing.Size(600, 400);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 247, 250);
+            ClientSize = new Size(800, 450);
+            Controls.Add(menuStrip);
+            Controls.Add(lblTitulo);
+            MainMenuStrip = menuStrip;
+            MinimumSize = new Size(600, 400);
+            Name = "Form1";
+            Text = "Empresa Constructora";
+            menuStrip.ResumeLayout(false);
+            menuStrip.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
