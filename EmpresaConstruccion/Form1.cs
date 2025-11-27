@@ -18,9 +18,16 @@ namespace EmpresaConstruccion
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            this.Hide();
             using (var login = new LoginForm(connectionString))
             {
-                if (login.ShowDialog(this) != DialogResult.OK)
+                if (login.ShowDialog(this) == DialogResult.OK)
+                {
+                    var dash = new DashboardForm(connectionString, login.Controls["txtUsuario"].Text);
+                    dash.FormClosed += (s, args) => this.Close();
+                    dash.Show();
+                }
+                else
                 {
                     this.Close();
                 }
@@ -46,41 +53,6 @@ namespace EmpresaConstruccion
         private void btnProbarConexion_Click(object sender, EventArgs e)
         {
             ProbarConexion();
-        }
-
-        private void menuTransporte_Click(object sender, EventArgs e)
-        {
-            var form = new TransporteForm(connectionString);
-            form.ShowDialog();
-        }
-
-        private void menuSalir_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void menuOrigen_Click(object sender, EventArgs e)
-        {
-            var form = new OrigenesForm(connectionString);
-            form.ShowDialog();
-        }
-
-        private void menuDestino_Click(object sender, EventArgs e)
-        {
-            var form = new DestinosForm(connectionString);
-            form.ShowDialog();
-        }
-
-        private void menuProducto_Click(object sender, EventArgs e)
-        {
-            var form = new ProductosForm(connectionString);
-            form.ShowDialog();
-        }
-
-        private void menuOptimizacion_Click(object sender, EventArgs e)
-        {
-            var form = new OptimizacionForm(connectionString);
-            form.ShowDialog();
         }
     }
 }
