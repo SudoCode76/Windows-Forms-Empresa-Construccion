@@ -67,7 +67,8 @@ namespace EmpresaConstruccion.Services
             decimal costoTotal = 0;
             for (int x = 0; x < oferta.Length; x++)
                 for (int y = 0; y < demanda.Length; y++)
-                    costoTotal += asignacion[x, y] * costos[x, y];
+                    if (costos[x, y] != decimal.MaxValue)
+                        costoTotal += asignacion[x, y] * costos[x, y];
             return (asignacion, costoTotal);
         }
 
@@ -140,7 +141,8 @@ namespace EmpresaConstruccion.Services
             decimal costoTotal = 0;
             for (int x = 0; x < m; x++)
                 for (int y = 0; y < n; y++)
-                    costoTotal += asignacion[x, y] * costos[x, y];
+                    if (costos[x, y] != decimal.MaxValue)
+                        costoTotal += asignacion[x, y] * costos[x, y];
             return (asignacion, costoTotal);
         }
 

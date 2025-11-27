@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using EmpresaConstruccion.Data;
+using Npgsql;
 
 namespace EmpresaConstruccion
 {
@@ -24,7 +25,10 @@ namespace EmpresaConstruccion
             var txtPassword = new TextBox { Name = "txtPassword", Location = new System.Drawing.Point(120, 87), Width = 170, UseSystemPasswordChar = true };
             var btnLogin = new Button { Text = "Ingresar", Location = new System.Drawing.Point(120, 140), Width = 170, Height = 35, FlatStyle = FlatStyle.Flat, BackColor = System.Drawing.Color.FromArgb(44, 130, 201), ForeColor = System.Drawing.Color.White };
             btnLogin.Click += (s, e) => Login(txtUsuario.Text, txtPassword.Text);
-            this.Controls.AddRange(new Control[] { lblUsuario, txtUsuario, lblPassword, txtPassword, btnLogin });
+            // Botón para testear conexión
+            var btnTestConexion = new Button { Text = "Testear Conexión", Location = new System.Drawing.Point(120, 180), Width = 170, Height = 30, FlatStyle = FlatStyle.Flat, BackColor = System.Drawing.Color.FromArgb(52, 152, 219), ForeColor = System.Drawing.Color.White };
+            btnTestConexion.Click += BtnTestConexion_Click;
+            this.Controls.AddRange(new Control[] { lblUsuario, txtUsuario, lblPassword, txtPassword, btnLogin, btnTestConexion });
         }
         private void Login(string usuario, string password)
         {
@@ -38,6 +42,21 @@ namespace EmpresaConstruccion
             else
             {
                 MessageBox.Show("Usuario o contraseña incorrectos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void BtnTestConexion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var conn = new NpgsqlConnection(_connectionString))
+                {
+                    conn.Open();
+                    MessageBox.Show("Conexión exitosa a la base de datos.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al conectar con la base de datos:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

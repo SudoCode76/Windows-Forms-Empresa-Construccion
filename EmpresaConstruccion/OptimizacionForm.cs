@@ -43,7 +43,7 @@ namespace EmpresaConstruccion
             sb.AppendLine($"Método Esquina Noroeste - Costo total: {costoNw}");
             sb.AppendLine(MatrizToString(asigNw));
             sb.AppendLine();
-            // Aquí se aplica el método de Vogel para calcular una asignación optimizada
+            // Aquí se aplica el método de la Esquina Noroeste para calcular la asignación inicial
             var (asigVogel, costoVogel) = solver.MetodoVogel();
             sb.AppendLine($"Método de Vogel - Costo total: {costoVogel}");
             sb.AppendLine(MatrizToString(asigVogel));

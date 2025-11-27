@@ -84,7 +84,7 @@ CREATE TABLE usuario (
 
 INSERT INTO usuario (usuario, password) VALUES
 ('admin', 'admin');
-
+SELECT COUNT(*) FROM usuario WHERE usuario = 'admin' AND password = 'admin';
 
 
 
