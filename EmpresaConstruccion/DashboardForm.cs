@@ -19,6 +19,11 @@ namespace EmpresaConstruccion
         private Label lblBienvenida;
         private FlowLayoutPanel menuLayout;
         private Panel[] menuItems;
+        private Panel panelActivo = null;
+        private Color colorActivo = Color.FromArgb(33, 150, 243); // Azul Material Design
+        private Color colorNormal = Color.Transparent;
+        private Color iconoActivo = Color.White;
+        private Color iconoNormal = Color.White;
 
         public DashboardForm(string connectionString, string usuario)
         {
@@ -27,13 +32,35 @@ namespace EmpresaConstruccion
             lblUsuario.Text = $"Usuario: {usuario}";
         }
 
+        private void ResaltarMenu(Panel panel)
+        {
+            if (panelActivo != null)
+            {
+                panelActivo.BackColor = colorNormal;
+                foreach (Control c in panelActivo.Controls)
+                {
+                    if (c is IconPictureBox icon) icon.IconColor = iconoNormal;
+                    if (c is Label lbl) lbl.ForeColor = Color.White;
+                    if (c is Label lbl2 && lbl2.Font.Bold) lbl2.ForeColor = Color.White;
+                }
+            }
+            panel.BackColor = colorActivo;
+            foreach (Control c in panel.Controls)
+            {
+                if (c is IconPictureBox icon) icon.IconColor = iconoActivo;
+                if (c is Label lbl) lbl.ForeColor = Color.White;
+                if (c is Label lbl2 && lbl2.Font.Bold) lbl2.ForeColor = Color.White;
+            }
+            panelActivo = panel;
+        }
+
         private Panel CrearMenuItem(string texto, IconChar iconChar, EventHandler click)
         {
-            var panel = new Panel { Height = 48, Width = 220, BackColor = Color.Transparent, Cursor = Cursors.Hand, Margin = new Padding(0, 0, 0, 0) };
+            var panel = new Panel { Height = 48, Width = 220, BackColor = colorNormal, Cursor = Cursors.Hand, Margin = new Padding(0, 0, 0, 0) };
             var icon = new IconPictureBox
             {
                 IconChar = iconChar,
-                IconColor = Color.White,
+                IconColor = iconoNormal,
                 IconSize = 32,
                 Size = new Size(40, 40),
                 Location = new Point(10, 4),
@@ -50,9 +77,9 @@ namespace EmpresaConstruccion
             };
             panel.Controls.Add(icon);
             panel.Controls.Add(label);
-            panel.Click += click;
-            icon.Click += click;
-            label.Click += click;
+            panel.Click += (s, e) => { click(s, e); ResaltarMenu(panel); };
+            icon.Click += (s, e) => { click(s, e); ResaltarMenu(panel); };
+            label.Click += (s, e) => { click(s, e); ResaltarMenu(panel); };
             return panel;
         }
         private void InitializeComponent()
@@ -119,6 +146,8 @@ namespace EmpresaConstruccion
             this.Controls.Add(panelMenu);
             // Drag window
             panelTop.MouseDown += (s, e) => { ReleaseCapture(); SendMessage(this.Handle, 0x112, 0xf012, 0); };
+            // Resalta la opción de bienvenida al inicio
+            ResaltarMenu(menuItems[0]);
         }
 
         private void CentrarBienvenida()
