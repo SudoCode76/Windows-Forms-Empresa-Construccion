@@ -15,71 +15,99 @@ namespace EmpresaConstruccion.Data
         public List<Models.Destino> GetAll()
         {
             var lista = new List<Models.Destino>();
-            using (var conn = new NpgsqlConnection(_connectionString))
+            try
             {
-                conn.Open();
-                using (var cmd = new NpgsqlCommand("SELECT id_destino, nombre, tipo, demanda, ubicacion FROM destino", conn))
-                using (var reader = cmd.ExecuteReader())
+                using (var conn = new NpgsqlConnection(_connectionString))
                 {
-                    while (reader.Read())
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand("SELECT id_destino, nombre, tipo, demanda, ubicacion FROM destino", conn))
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        lista.Add(new Models.Destino
+                        while (reader.Read())
                         {
-                            IdDestino = reader.GetInt32(0),
-                            Nombre = reader.GetString(1),
-                            Tipo = reader.IsDBNull(2) ? null : reader.GetString(2),
-                            Demanda = reader.IsDBNull(3) ? 0 : reader.GetInt32(3),
-                            Ubicacion = reader.IsDBNull(4) ? null : reader.GetString(4)
-                        });
+                            lista.Add(new Models.Destino
+                            {
+                                IdDestino = reader.GetInt32(0),
+                                Nombre = reader.GetString(1),
+                                Tipo = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                Demanda = reader.IsDBNull(3) ? 0 : reader.GetInt32(3),
+                                Ubicacion = reader.IsDBNull(4) ? null : reader.GetString(4)
+                            });
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al obtener destinos.", ex);
             }
             return lista;
         }
 
         public void Add(Models.Destino destino)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            try
             {
-                conn.Open();
-                using (var cmd = new NpgsqlCommand("INSERT INTO destino (nombre, tipo, demanda, ubicacion) VALUES (@nombre, @tipo, @demanda, @ubicacion)", conn))
+                using (var conn = new NpgsqlConnection(_connectionString))
                 {
-                    cmd.Parameters.AddWithValue("@nombre", destino.Nombre);
-                    cmd.Parameters.AddWithValue("@tipo", (object)destino.Tipo ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@demanda", destino.Demanda);
-                    cmd.Parameters.AddWithValue("@ubicacion", (object)destino.Ubicacion ?? DBNull.Value);
-                    cmd.ExecuteNonQuery();
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand("INSERT INTO destino (nombre, tipo, demanda, ubicacion) VALUES (@nombre, @tipo, @demanda, @ubicacion)", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", destino.Nombre);
+                        cmd.Parameters.AddWithValue("@tipo", (object)destino.Tipo ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@demanda", destino.Demanda);
+                        cmd.Parameters.AddWithValue("@ubicacion", (object)destino.Ubicacion ?? DBNull.Value);
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al agregar destino.", ex);
             }
         }
 
         public void Update(Models.Destino destino)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            try
             {
-                conn.Open();
-                using (var cmd = new NpgsqlCommand("UPDATE destino SET nombre=@nombre, tipo=@tipo, demanda=@demanda, ubicacion=@ubicacion WHERE id_destino=@id", conn))
+                using (var conn = new NpgsqlConnection(_connectionString))
                 {
-                    cmd.Parameters.AddWithValue("@nombre", destino.Nombre);
-                    cmd.Parameters.AddWithValue("@tipo", (object)destino.Tipo ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@demanda", destino.Demanda);
-                    cmd.Parameters.AddWithValue("@ubicacion", (object)destino.Ubicacion ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@id", destino.IdDestino);
-                    cmd.ExecuteNonQuery();
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand("UPDATE destino SET nombre=@nombre, tipo=@tipo, demanda=@demanda, ubicacion=@ubicacion WHERE id_destino=@id", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", destino.Nombre);
+                        cmd.Parameters.AddWithValue("@tipo", (object)destino.Tipo ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@demanda", destino.Demanda);
+                        cmd.Parameters.AddWithValue("@ubicacion", (object)destino.Ubicacion ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@id", destino.IdDestino);
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al actualizar destino.", ex);
             }
         }
 
         public void Delete(int idDestino)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            try
             {
-                conn.Open();
-                using (var cmd = new NpgsqlCommand("DELETE FROM destino WHERE id_destino=@id", conn))
+                using (var conn = new NpgsqlConnection(_connectionString))
                 {
-                    cmd.Parameters.AddWithValue("@id", idDestino);
-                    cmd.ExecuteNonQuery();
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand("DELETE FROM destino WHERE id_destino=@id", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", idDestino);
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al eliminar destino.", ex);
             }
         }
     }
