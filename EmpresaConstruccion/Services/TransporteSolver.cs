@@ -131,12 +131,21 @@ namespace EmpresaConstruccion.Services
                         if (!filaUsada[i] && costos[i, minJ] < minCosto)
                         { minCosto = costos[i, minJ]; minI = i; }
                 }
-                int cantidad = Math.Min(oferta[minI], demanda[minJ]);
-                asignacion[minI, minJ] = cantidad;
-                oferta[minI] -= cantidad;
-                demanda[minJ] -= cantidad;
-                if (oferta[minI] == 0) filaUsada[minI] = true;
-                if (demanda[minJ] == 0) colUsada[minJ] = true;
+                int cantidad = 0;
+                if (minI >= 0 && minJ >= 0)
+                {
+                    cantidad = Math.Min(oferta[minI], demanda[minJ]);
+                    asignacion[minI, minJ] = cantidad;
+                    oferta[minI] -= cantidad;
+                    demanda[minJ] -= cantidad;
+                    if (oferta[minI] == 0) filaUsada[minI] = true;
+                    if (demanda[minJ] == 0) colUsada[minJ] = true;
+                }
+                else
+                {
+                    // No hay más rutas válidas, salir del ciclo
+                    break;
+                }
             }
             decimal costoTotal = 0;
             for (int x = 0; x < m; x++)
