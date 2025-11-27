@@ -2,6 +2,8 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Reflection;
+using FontAwesome.Sharp;
 
 namespace EmpresaConstruccion
 {
@@ -15,6 +17,8 @@ namespace EmpresaConstruccion
         private Form activeForm = null;
         private string _connectionString;
         private Label lblBienvenida;
+        private FlowLayoutPanel menuLayout;
+        private Panel[] menuItems;
 
         public DashboardForm(string connectionString, string usuario)
         {
@@ -23,6 +27,34 @@ namespace EmpresaConstruccion
             lblUsuario.Text = $"Usuario: {usuario}";
         }
 
+        private Panel CrearMenuItem(string texto, IconChar iconChar, EventHandler click)
+        {
+            var panel = new Panel { Height = 48, Width = 220, BackColor = Color.Transparent, Cursor = Cursors.Hand, Margin = new Padding(0, 0, 0, 0) };
+            var icon = new IconPictureBox
+            {
+                IconChar = iconChar,
+                IconColor = Color.White,
+                IconSize = 32,
+                Size = new Size(40, 40),
+                Location = new Point(10, 4),
+                BackColor = Color.Transparent
+            };
+            var label = new Label
+            {
+                Text = texto,
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 12, FontStyle.Regular),
+                AutoSize = true,
+                Location = new Point(55, 12),
+                BackColor = Color.Transparent
+            };
+            panel.Controls.Add(icon);
+            panel.Controls.Add(label);
+            panel.Click += click;
+            icon.Click += click;
+            label.Click += click;
+            return panel;
+        }
         private void InitializeComponent()
         {
             this.Text = "Empresa Constructora - Dashboard";
@@ -30,16 +62,38 @@ namespace EmpresaConstruccion
             this.WindowState = FormWindowState.Maximized;
             this.BackColor = Color.FromArgb(245, 247, 250);
             // Panel lateral (menú)
-            panelMenu = new Panel { Dock = DockStyle.Left, Width = 200, BackColor = Color.FromArgb(30, 34, 45) };
-            btnOrigenes = CrearBotonMenu("Orígenes", BtnOrigenes_Click);
-            btnDestinos = CrearBotonMenu("Destinos", BtnDestinos_Click);
-            btnProductos = CrearBotonMenu("Productos", BtnProductos_Click);
-            btnTransporte = CrearBotonMenu("Transporte", BtnTransporte_Click);
-            btnOptimizacion = CrearBotonMenu("Optimización", BtnOptimizacion_Click);
-            btnCerrarSesion = CrearBotonMenu("Cerrar Sesión", BtnCerrarSesion_Click, Color.FromArgb(52, 73, 94));
-            btnSalir = CrearBotonMenu("Salir", BtnSalir_Click, Color.FromArgb(231, 76, 60));
-            var menuLayout = new FlowLayoutPanel { Dock = DockStyle.Fill, FlowDirection = FlowDirection.TopDown, Padding = new Padding(0, 40, 0, 0), BackColor = Color.Transparent, AutoScroll = true };
-            menuLayout.Controls.AddRange(new Control[] { btnOrigenes, btnDestinos, btnProductos, btnTransporte, btnOptimizacion, btnCerrarSesion, btnSalir });
+            panelMenu = new Panel { Dock = DockStyle.Left, Width = 220, BackColor = Color.FromArgb(36, 41, 46) };
+            menuLayout = new FlowLayoutPanel { Dock = DockStyle.Fill, FlowDirection = FlowDirection.TopDown, Padding = new Padding(0, 20, 0, 0), BackColor = Color.Transparent, AutoScroll = true, WrapContents = false };
+            // Menú hamburguesa y título
+            var panelHeader = new Panel { Height = 48, Width = 220, BackColor = Color.Transparent };
+            var iconMenu = new IconPictureBox
+            {
+                IconChar = IconChar.Bars,
+                IconColor = Color.White,
+                IconSize = 32,
+                Size = new Size(40, 40),
+                Location = new Point(10, 8),
+                BackColor = Color.Transparent
+            };
+            var lblMenu = new Label { Text = "Menú", ForeColor = Color.White, Font = new Font("Segoe UI", 13, FontStyle.Bold), AutoSize = true, Location = new Point(55, 12), BackColor = Color.Transparent };
+            panelHeader.Controls.Add(iconMenu);
+            panelHeader.Controls.Add(lblMenu);
+            menuLayout.Controls.Add(panelHeader);
+            // Opciones del menú (Paneles, no Dock=Top)
+            menuItems = new Panel[] {
+                CrearMenuItem("Orígenes", IconChar.Home, BtnOrigenes_Click),
+                CrearMenuItem("Destinos", IconChar.MapMarkerAlt, BtnDestinos_Click),
+                CrearMenuItem("Productos", IconChar.Boxes, BtnProductos_Click),
+                CrearMenuItem("Transporte", IconChar.Truck, BtnTransporte_Click),
+                CrearMenuItem("Optimización", IconChar.ChartLine, BtnOptimizacion_Click),
+                CrearMenuItem("Cerrar Sesión", IconChar.SignOutAlt, BtnCerrarSesion_Click),
+                CrearMenuItem("Salir", IconChar.TimesCircle, BtnSalir_Click)
+            };
+            foreach (var item in menuItems)
+            {
+                item.Width = 220;
+                menuLayout.Controls.Add(item);
+            }
             panelMenu.Controls.Add(menuLayout);
             // Panel superior
             panelTop = new Panel { Dock = DockStyle.Top, Height = 60, BackColor = Color.FromArgb(44, 130, 201) };
