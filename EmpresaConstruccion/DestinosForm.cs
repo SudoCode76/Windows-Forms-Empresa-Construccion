@@ -41,7 +41,8 @@ namespace EmpresaConstruccion
         private void CargarDatos()
         {
             dgvDestinos.DataSource = null;
-            dgvDestinos.DataSource = destinoRepo.GetAll();
+            var destinosLista = destinoRepo.GetAll();
+            dgvDestinos.DataSource = destinosLista.ToList();
             dgvDestinos.ClearSelection();
         }
         private void btnAgregar_Click(object sender, System.EventArgs e)

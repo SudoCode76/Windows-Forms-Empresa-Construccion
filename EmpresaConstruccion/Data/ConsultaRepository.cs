@@ -1,7 +1,7 @@
 using Npgsql;
 using System;
-using System.Collections.Generic;
 using EmpresaConstruccion.Models;
+using EmpresaConstruccion.Data;
 
 namespace EmpresaConstruccion.Data
 {
@@ -23,9 +23,9 @@ namespace EmpresaConstruccion.Data
             }
         }
 
-        public List<(string Origen, string Destino, decimal Costo)> ObtenerRutasMasEconomicas()
+        public RutaEconomicaLista ObtenerRutasMasEconomicas()
         {
-            var lista = new List<(string, string, decimal)>();
+            var lista = new RutaEconomicaLista();
             using (var conn = new NpgsqlConnection(_connectionString))
             {
                 conn.Open();
@@ -34,18 +34,18 @@ namespace EmpresaConstruccion.Data
                 {
                     while (reader.Read())
                     {
-                        lista.Add((reader.GetString(0), reader.GetString(1), reader.GetDecimal(2)));
+                        lista.Agregar(reader.GetString(0), reader.GetString(1), reader.GetDecimal(2));
                     }
                 }
             }
             return lista;
         }
 
-        public List<Origen> ObtenerInfoOrigenes()
+        public System.Collections.Generic.List<Origen> ObtenerInfoOrigenes()
         {
             return new OrigenRepository(_connectionString).GetAll();
         }
-        public List<Destino> ObtenerInfoDestinos()
+        public DestinoLista ObtenerInfoDestinos()
         {
             return new DestinoRepository(_connectionString).GetAll();
         }

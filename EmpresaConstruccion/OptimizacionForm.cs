@@ -53,15 +53,21 @@ namespace EmpresaConstruccion
             sb.AppendLine($"Costo total real de distribución (según registros): {consulta.ObtenerCostoTotalDistribucion()}");
             sb.AppendLine();
             sb.AppendLine("Rutas más económicas:");
-            foreach (var ruta in consulta.ObtenerRutasMasEconomicas())
-                sb.AppendLine($"{ruta.Origen} ? {ruta.Destino}: {ruta.Costo}");
+            var rutas = consulta.ObtenerRutasMasEconomicas();
+            var nodo = rutas.Cabeza;
+            while (nodo != null)
+            {
+                sb.AppendLine($"{nodo.Origen} ? {nodo.Destino}: {nodo.Costo}");
+                nodo = nodo.Siguiente;
+            }
             sb.AppendLine();
             sb.AppendLine("Orígenes:");
             foreach (var o in consulta.ObtenerInfoOrigenes())
                 sb.AppendLine($"{o.Nombre} - Capacidad: {o.CapacidadProduccion}, Ubicación: {o.Ubicacion}");
             sb.AppendLine();
             sb.AppendLine("Destinos:");
-            foreach (var d in consulta.ObtenerInfoDestinos())
+            var destinos = consulta.ObtenerInfoDestinos();
+            foreach (var d in destinos.Enumerar())
                 sb.AppendLine($"{d.Nombre} - Demanda: {d.Demanda}, Ubicación: {d.Ubicacion}");
             txtResultados.Text = sb.ToString();
         }

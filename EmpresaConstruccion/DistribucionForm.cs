@@ -101,7 +101,8 @@ namespace EmpresaConstruccion
             rutas = rutaRepo.GetAll();
             productos = productoRepo.GetAll();
             var origenes = origenRepo.GetAll();
-            var destinos = destinoRepo.GetAll();
+            var destinosLista = destinoRepo.GetAll();
+            var destinos = destinosLista.ToList();
             // Mostrar la ruta como "Origen ? Destino"
             var rutasDisplay = rutas.Select(r => new {
                 IdRuta = (int)r.GetType().GetProperty("IdRuta").GetValue(r),

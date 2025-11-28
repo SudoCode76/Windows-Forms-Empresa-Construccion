@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using EmpresaConstruccion.Models;
 using EmpresaConstruccion.Data;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EmpresaConstruccion
 {
@@ -154,7 +155,8 @@ namespace EmpresaConstruccion
             var origenRepo = new OrigenRepository(connectionString);
             var destinoRepo = new DestinoRepository(connectionString);
             origenes = origenRepo.GetAll();
-            destinos = destinoRepo.GetAll();
+            var destinosLista = destinoRepo.GetAll();
+            destinos = destinosLista.ToList();
             cmbOrigen.DataSource = origenes;
             cmbOrigen.DisplayMember = "Nombre";
             cmbOrigen.ValueMember = "IdOrigen";

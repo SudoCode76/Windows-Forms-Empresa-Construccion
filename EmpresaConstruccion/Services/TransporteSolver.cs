@@ -19,9 +19,9 @@ namespace EmpresaConstruccion.Services
         public (int ofertaTotal, int demandaTotal) CalcularOfertaDemandaTotal()
         {
             var origenes = new OrigenRepository(_connectionString).GetAll();
-            var destinos = new DestinoRepository(_connectionString).GetAll();
+            var destinosLista = new DestinoRepository(_connectionString).GetAll();
             int oferta = origenes.Sum(o => o.CapacidadProduccion);
-            int demanda = destinos.Sum(d => d.Demanda);
+            int demanda = destinosLista.SumarDemanda();
             return (oferta, demanda);
         }
 
@@ -29,7 +29,8 @@ namespace EmpresaConstruccion.Services
         public decimal[,] GenerarMatrizCostos(out List<Origen> origenes, out List<Destino> destinos)
         {
             var origenesLocal = new OrigenRepository(_connectionString).GetAll();
-            var destinosLocal = new DestinoRepository(_connectionString).GetAll();
+            var destinosLista = new DestinoRepository(_connectionString).GetAll();
+            var destinosLocal = destinosLista.ToList();
             origenes = origenesLocal;
             destinos = destinosLocal;
             var rutas = new RutaRepository(_connectionString).GetAll();

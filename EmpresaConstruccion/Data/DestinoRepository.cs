@@ -1,5 +1,5 @@
 using Npgsql;
-using System.Collections.Generic;
+using EmpresaConstruccion.Data;
 
 namespace EmpresaConstruccion.Data
 {
@@ -12,9 +12,9 @@ namespace EmpresaConstruccion.Data
             _connectionString = connectionString;
         }
 
-        public List<Models.Destino> GetAll()
+        public DestinoLista GetAll()
         {
-            var lista = new List<Models.Destino>();
+            var lista = new DestinoLista();
             try
             {
                 using (var conn = new NpgsqlConnection(_connectionString))
@@ -25,14 +25,15 @@ namespace EmpresaConstruccion.Data
                     {
                         while (reader.Read())
                         {
-                            lista.Add(new Models.Destino
+                            var destino = new Models.Destino
                             {
                                 IdDestino = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
                                 Tipo = reader.IsDBNull(2) ? null : reader.GetString(2),
                                 Demanda = reader.IsDBNull(3) ? 0 : reader.GetInt32(3),
                                 Ubicacion = reader.IsDBNull(4) ? null : reader.GetString(4)
-                            });
+                            };
+                            lista.Agregar(destino);
                         }
                     }
                 }

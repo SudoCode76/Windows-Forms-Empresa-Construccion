@@ -78,12 +78,12 @@ namespace EmpresaConstruccion
         {
             // Obtener orígenes y destinos para mostrar nombres en vez de IDs
             var origenes = new EmpresaConstruccion.Data.OrigenRepository(_connectionString).GetAll();
-            var destinos = new EmpresaConstruccion.Data.DestinoRepository(_connectionString).GetAll();
+            var destinosLista = new EmpresaConstruccion.Data.DestinoRepository(_connectionString).GetAll();
             var rutas = rutaRepo.GetAll();
             var rutasDisplay = rutas.Select(r => new {
                 IdRuta = (int)r.GetType().GetProperty("IdRuta").GetValue(r),
                 Origen = origenes.FirstOrDefault(o => o.IdOrigen == (int)r.GetType().GetProperty("IdOrigen").GetValue(r))?.Nombre,
-                Destino = destinos.FirstOrDefault(d => d.IdDestino == (int)r.GetType().GetProperty("IdDestino").GetValue(r))?.Nombre,
+                Destino = destinosLista.BuscarPorId((int)r.GetType().GetProperty("IdDestino").GetValue(r))?.Nombre,
                 CostoTransporte = (decimal)r.GetType().GetProperty("CostoTransporte").GetValue(r),
                 DistanciaKm = (decimal)r.GetType().GetProperty("DistanciaKm").GetValue(r),
                 TiempoHoras = (decimal)r.GetType().GetProperty("TiempoHoras").GetValue(r),
